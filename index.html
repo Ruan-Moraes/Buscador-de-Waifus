@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gerador de Waifus</title>
+    <link rel="stylesheet" href="src/css/styles.css" />
+    <script src="src/js/main.js" defer></script>
+    <link
+      rel="shortcut icon"
+      href="assets/favicon/favicon.png"
+      type="image/x-png"
+    />
+  </head>
+  <body class="w-screen h-screen flex justify-center items-center">
+    <div class="border-2 border-red-400 rounded-lg p-4">
+      <h1 class="text-2xl font-medium uppercase">Gerador de waifus</h1>
+      <div class="w-96 h-96">
+        <img src="" alt="Waifu" id="waifu" class="w-full h-full object-cover" />
+      </div>
+      <div>
+        <form id="form">
+          <select name="options" id="options">
+            <option value="waifu">Waifu</option>
+            <option value="maid">Maid</option>
+            <option value="marin-kitagawa">Marin Kitagawa</option>
+            <option value="mori-calliope">Mori Calliope</option>
+            <option value="raiden-shogun">Raiden Shogun</option>
+            <option value="oppai">Oppai</option>
+            <option value="selfies">Selfies</option>
+            <option value="uniform">Uniform</option>
+            <option value="kamisato-ayaka">Kamisato Ayaka</option>
+          </select>
+          <button id="generate-image">Gerar</button>
+        </form>
+      </div>
+    </div>
+    <script src="assets/js/script.js"></script>
+  </body>
+</html>

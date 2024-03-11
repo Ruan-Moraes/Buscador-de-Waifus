@@ -1,0 +1,26 @@
+{
+  "name": "gerador-de-waifu",
+  "version": "1.0.0",
+  "description": "Gerador de waifus",
+  "main": "tailwind.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npx tailwindcss -i ./tailwind.css -o ./src/css/styles.css --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ruan-Moraes/gerador-de-waifu.git"
+  },
+  "keywords": [
+    "Waifus"
+  ],
+  "author": "Ruan Moraes Santos Barbosa",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ruan-Moraes/gerador-de-waifu/issues"
+  },
+  "homepage": "https://github.com/Ruan-Moraes/gerador-de-waifu#readme",
+  "devDependencies": {
+    "tailwindcss": "^3.4.1"
+  }
+}
