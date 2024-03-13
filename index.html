@@ -12,29 +12,71 @@
       type="image/x-png"
     />
   </head>
-  <body class="w-screen h-screen flex justify-center items-center">
-    <div class="border-2 border-red-400 rounded-lg p-4">
-      <h1 class="text-2xl font-medium uppercase">Gerador de waifus</h1>
-      <div class="w-96 h-96">
-        <img src="" alt="Waifu" id="waifu" class="w-full h-full object-cover" />
+  <body class="flex flex-col justify-between h-screen bg-!050609 text-white">
+    <div class="p-3">
+      <div class="mt-2">
+        <h1 class="mb-3.5 text-center text-xl">Buscador de Waifus</h1>
+        <div class="w-full">
+          <img
+            src="https://fakeimg.pl/1024x1024"
+            alt="Waifu"
+            id="waifu"
+            class="w-full h-full object-cover border-!FDEFE7 border-2"
+          />
+        </div>
       </div>
+      <div class="border-!F855B1 border-1 my-3.5"></div>
       <div>
-        <form id="form">
-          <select name="options" id="options">
-            <option value="waifu">Waifu</option>
-            <option value="maid">Maid</option>
-            <option value="marin-kitagawa">Marin Kitagawa</option>
-            <option value="mori-calliope">Mori Calliope</option>
-            <option value="raiden-shogun">Raiden Shogun</option>
-            <option value="oppai">Oppai</option>
-            <option value="selfies">Selfies</option>
-            <option value="uniform">Uniform</option>
-            <option value="kamisato-ayaka">Kamisato Ayaka</option>
-          </select>
-          <button id="generate-image">Gerar</button>
+        <form id="form" class="grid grid-cols-2 grid-rows-3 gap-3.5">
+          <div class="flex flex-col gap-1 col-start-1 row-start-1 row-span-2">
+            <h2 class="text-xs text-center">Tags</h2>
+            <ul class="bg-!242424 grow p-2"></ul>
+          </div>
+          <div class="row-start-1 col-start-2 flex flex-col items-center gap-1">
+            <label for="options" class="text-xs text-center"
+              >Tags pre-criadas</label
+            >
+            <select name="options" id="options" class="w-full grow p-2">
+              <option value="default" disabled selected>
+                Escolha uma opção
+              </option>
+              <optgroup label="Tags">
+                <option value="waifu">Waifu</option>
+                <option value="maid">Maid</option>
+                <option value="marin-kitagawa">Marin Kitagawa</option>
+                <option value="mori-calliope">Mori Calliope</option>
+                <option value="raiden-shogun">Raiden Shogun</option>
+                <option value="oppai">Oppai</option>
+                <option value="selfies">Selfies</option>
+                <option value="uniform">Uniform</option>
+                <option value="kamisato-ayaka">Kamisato Ayaka</option>
+              </optgroup>
+            </select>
+          </div>
+          <div class="flex flex-col items-center gap-1 row-start-2 col-start-2">
+            <label for="tags" class="text-xs text-center"
+              >Adiciona mais tags</label
+            >
+            <input
+              type="text"
+              name="tags"
+              id="tags"
+              placeholder="Adicione tags"
+              class="w-full grow p-2 text-black"
+            />
+          </div>
+          <div
+            class="w-3/4 p-4 mt-2 mx-auto row-start-3 col-start-1 col-span-2 flex justify-center items-center bg-!F855B1"
+          >
+            <button>Buscar Waifu</button>
+          </div>
         </form>
       </div>
     </div>
-    <script src="assets/js/script.js"></script>
+    <div>
+      <div class="p-4 bg-!F855B1 text-center">
+        <a href="" download="Download imagem buscada">Download Imagem</a>
+      </div>
+    </div>
   </body>
 </html>
