@@ -1,10 +1,11 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-br">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Gerador de Waifus</title>
     <link rel="stylesheet" href="src/css/styles.css" />
+    <script src="src/js/js-file-downloader.min.js" defer></script>
     <script src="src/js/main.js" defer></script>
     <link
       rel="shortcut icon"
@@ -12,7 +13,7 @@
       type="image/x-png"
     />
   </head>
-  <body class="flex flex-col justify-between h-screen bg-!050609 text-white">
+  <body class="flex h-screen flex-col justify-between bg-!050609 text-white">
     <div class="p-3">
       <div class="mt-2">
         <h1 class="mb-3.5 text-center text-xl">Buscador de Waifus</h1>
@@ -21,23 +22,23 @@
             src="https://fakeimg.pl/1024x1024"
             alt="Waifu"
             id="waifu"
-            class="w-full h-full object-cover border-!FDEFE7 border-2"
+            class="border-!FDEFE7 h-full w-full border-2 object-cover"
           />
         </div>
       </div>
-      <div class="border-!F855B1 border-1 my-3.5"></div>
+      <div class="my-3.5 border-1 border-!F855B1"></div>
       <div>
         <form id="form" class="grid grid-cols-2 grid-rows-3 gap-3.5">
-          <div class="flex flex-col gap-1 col-start-1 row-start-1 row-span-2">
-            <h2 class="text-xs text-center">Tags</h2>
-            <ul class="bg-!242424 grow p-2"></ul>
+          <div class="col-start-1 row-span-2 row-start-1 flex flex-col gap-1">
+            <h2 class="text-center text-xs">Tags</h2>
+            <ul class="grow bg-!242424 p-2"></ul>
           </div>
-          <div class="row-start-1 col-start-2 flex flex-col items-center gap-1">
-            <label for="options" class="text-xs text-center"
+          <div class="col-start-2 row-start-1 flex flex-col items-center gap-1">
+            <label for="options" class="text-center text-xs"
               >Tags pre-criadas</label
             >
             <select name="options" id="options" class="w-full grow p-2">
-              <option value="default" disabled selected>
+              <option value="" disabled selected>
                 Escolha uma opção
               </option>
               <optgroup label="Tags">
@@ -53,8 +54,8 @@
               </optgroup>
             </select>
           </div>
-          <div class="flex flex-col items-center gap-1 row-start-2 col-start-2">
-            <label for="tags" class="text-xs text-center"
+          <div class="col-start-2 row-start-2 flex flex-col items-center gap-1">
+            <label for="tags" class="text-center text-xs"
               >Adiciona mais tags</label
             >
             <input
@@ -66,7 +67,7 @@
             />
           </div>
           <div
-            class="w-3/4 p-4 mt-2 mx-auto row-start-3 col-start-1 col-span-2 flex justify-center items-center bg-!F855B1"
+            class="col-span-2 col-start-1 row-start-3 mx-auto mt-2 flex w-3/4 items-center justify-center bg-!F855B1 p-4"
           >
             <button>Buscar Waifu</button>
           </div>
@@ -74,8 +75,8 @@
       </div>
     </div>
     <div>
-      <div class="p-4 bg-!F855B1 text-center">
-        <a href="" download="Download imagem buscada">Download Imagem</a>
+      <div class="bg-!F855B1 p-4 text-center">
+        <a href="#" download="waifu.png" id="download">Download Imagem</a>
       </div>
     </div>
   </body>
