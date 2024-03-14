@@ -2,12 +2,22 @@ const form = document.querySelector("#form");
 
 form.addEventListener("submit", async (event) => {
   event.preventDefault();
-
-  const apiUrl = "https://api.waifu.im/search";
   
-  const tags = document.querySelector("#options").value || "waifu";
+  changingTheButtonState();
+
+  const paramsUrl = createRequest();
+  const waifuImageURL = await getWaifu(paramsUrl);
+
+  changingTheButtonState();
+
+  addImageToDOM(waifuImageURL);
+  addImageForDownload(waifuImageURL);
+});
+
+function createRequest() {
+  const preMadeTags = document.querySelector("#options").value || "waifu";
   const params = {
-    included_tags: [tags],
+    included_tags: [preMadeTags],
   };
 
   const queryParams = new URLSearchParams();
@@ -22,22 +32,53 @@ form.addEventListener("submit", async (event) => {
     }
   }
 
-  const requestUrl = `${apiUrl}?${queryParams.toString()}`;
+  return queryParams.toString();
+}
+
+async function getWaifu(paramsUrl) {
+  const apiUrl = "https://api.waifu.im/search";
+  const requestUrl = `${apiUrl}?${paramsUrl}`;
 
   try {
-    const image = await fetch(requestUrl)
-      .then((response) => response.json())
-      .then((data) => data.images[0].url);
-
-    const imageElement = document.querySelector("#waifu");
-    imageElement.src = image;
-
-    const imageBlob = await fetch(image).then((response) => response.blob());
-
-    const downloadLink = document.querySelector("#download");
-    downloadLink.href = URL.createObjectURL(imageBlob);
-
+    return await fetch(requestUrl).then((response) => response.json()).then((response) => response.images[0].url);
   } catch (error) {
+    changingTheButtonState();
+
     console.error(`Ocorreu um erro: ${error}`);
   }
-});
+}
+
+function changingTheButtonState () {
+  const button = document.querySelector("#search-waifu");
+  
+  if (button.innerHTML === "Buscar Waifu") {
+    button.innerHTML = "Buscando Waifu...";
+  } else {
+    button.innerHTML = "Buscar Waifu";
+  }
+}
+
+function addImageToDOM(waifuImageURL) { 
+  const image = document.querySelector("#waifu-image");
+
+  loadingImageDom(image, waifuImageURL)
+
+  setTimeout(() => {
+    image.src = waifuImageURL;
+  }, 500);
+}
+
+function loadingImageDom (image, waifuImageURL) {
+  if (image.src !== waifuImageURL) {
+    image.src = "./assets/loading/loading.svg";
+  }
+}
+
+async function addImageForDownload(waifuImageURL) {
+  const downloadLink = document.querySelector("#download");
+
+  const imageBlob = await fetch(waifuImageURL).then((response) => response.blob());
+
+  downloadLink.href = URL.createObjectURL(imageBlob);
+}
+
