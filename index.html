@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Gerador de Waifus</title>
     <link rel="stylesheet" href="src/css/styles.css" />
-    <script src="src/js/js-file-downloader.min.js" defer></script>
     <script src="src/js/main.js" defer></script>
     <link
       rel="shortcut icon"
@@ -13,71 +12,77 @@
       type="image/x-png"
     />
   </head>
-  <body class="flex h-screen flex-col justify-between bg-!050609 text-white">
-    <div class="p-3">
-      <div class="mt-2">
-        <h1 class="mb-3.5 text-center text-xl">Buscador de Waifus</h1>
-        <div class="w-full">
-          <img
-            src=""
-            alt="Waifu"
-            id="waifu-image"
-            class="border-!FDEFE7 h-full w-full border-2 object-cover"
-          />
-        </div>
-      </div>
-      <div class="my-3.5 border-1 border-!F855B1"></div>
-      <div>
-        <form id="form" class="grid grid-cols-2 grid-rows-3 gap-3.5">
-          <div class="col-start-1 row-span-2 row-start-1 flex flex-col gap-1">
-            <h2 class="text-center text-xs">Tags</h2>
-            <ul class="grow bg-!242424 p-2"></ul>
-          </div>
-          <div class="col-start-2 row-start-1 flex flex-col items-center gap-1">
-            <label for="options" class="text-center text-xs"
-              >Tags pre-criadas</label
-            >
-            <select name="options" id="options" class="w-full grow p-2">
-              <option value="" disabled selected>
-                Escolha uma opção
-              </option>
-              <optgroup label="Tags">
-                <option value="waifu">Waifu</option>
-                <option value="maid">Maid</option>
-                <option value="marin-kitagawa">Marin Kitagawa</option>
-                <option value="mori-calliope">Mori Calliope</option>
-                <option value="raiden-shogun">Raiden Shogun</option>
-                <option value="oppai">Oppai</option>
-                <option value="selfies">Selfies</option>
-                <option value="uniform">Uniform</option>
-                <option value="kamisato-ayaka">Kamisato Ayaka</option>
-              </optgroup>
-            </select>
-          </div>
-          <div class="col-start-2 row-start-2 flex flex-col items-center gap-1">
-            <label for="tags" class="text-center text-xs"
-              >Adiciona mais tags</label
-            >
-            <input
-              type="text"
-              name="tags"
-              id="tags"
-              placeholder="Adicione tags"
-              class="w-full grow p-2 text-black"
+  <body class="h-screen flex flex-col justify-between bg-!050609 text-white">
+    <main>
+      <div class="p-3">
+        <div class="mt-2">
+          <h1 class="mb-3.5 text-center text-xl">Buscador de Waifus</h1>
+          <div class="w-full">
+            <img
+              src=""
+              alt="Waifu"
+              id="waifu-image"
+              class="border-!FDEFE7 h-full w-full border-2 object-cover"
             />
           </div>
-          <div
-            class="col-span-2 col-start-1 row-start-3 mx-auto mt-2 flex w-3/4 items-center justify-center bg-!F855B1 p-4"
-          >
-            <button id="search-waifu">Buscar Waifu</button>
+        </div>
+        <div class="my-3.5 border-1 border-!F855B1"></div>
+        <div>
+          <form id="form" class="grid grid-cols-2 grid-rows-3 gap-3.5">
+            <div class="col-start-1 row-span-2 row-start-1 flex flex-col gap-1">
+              <h2 class="text-center font-black text-xs">Tags</h2>
+              <ul id="tags" class="w-full h-full p-2 bg-!242424 text-xs rounded-md">
+                
+              </ul>
+            </div>
+            <div class="col-start-2 row-start-1 flex flex-col items-center gap-1">
+              <label for="options" class="text-center font-black text-xs"
+                >Tags pre-criadas</label
+              >
+              <select name="options" id="options" class="w-full grow p-2 rounded-md">
+                <option value="" disabled selected>
+                  Escolha uma opção
+                </option>
+                <optgroup label="Tags">
+                  <option value="maid">Maid</option>
+                  <option value="marin-kitagawa">Marin Kitagawa</option>
+                  <option value="mori-calliope">Mori Calliope</option>
+                  <option value="raiden-shogun">Raiden Shogun</option>
+                  <option value="oppai">Oppai</option>
+                  <option value="selfies">Selfies</option>
+                  <option value="uniform">Uniform</option>
+                  <option value="kamisato-ayaka">Kamisato Ayaka</option>
+                </optgroup>
+              </select>
+            </div>
+            <div id="add-tag" class="col-start-2 row-start-2 w-full h-full flex    justify-center items-center bg-!F855B1 rounded-md text-center cursor-pointer">
+              Adicionar Tag
+            </div>
+            <div
+              class="col-span-2 col-start-1 row-start-3 w-3/4 mt-2 mx-auto flex items-center justify-center bg-!F855B1"
+            >
+              <input type="submit" value="Buscar Waifu" id="search-waifu" class="p-4 w-full h-full rounded-md"></input>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="flex justify-center items-center">
+          <a href="#" download="waifu.png" id="download" class="p-4 w-full h-full bg-!F855B1 text-center">Download Imagem</a>
+      </div>
+      <!-- <div class="modal" id="modal">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 class="modal-title">Ocorreu um erro</h2>
+            <span class="close" id="close">&times;</span>
           </div>
-        </form>
-      </div>
-    </div>
-    <div>
-      <div class="bg-!F855B1 p-4 text-center">
-        <a href="#" download="waifu.png" id="download">Download Imagem</a>
-      </div>
-    </div>
+          <div class="modal-body">
+            <p id="modal-message"></p>
+          </div>
+          <div class="modal-footer">
+            <button id="close-modal">Fechar</button>
+          </div>
+        </div>
+      </div> -->
+    </main>
   </body>
 </html>
