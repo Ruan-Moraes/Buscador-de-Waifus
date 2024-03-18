@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Gerador de Waifus</title>
     <link rel="stylesheet" href="src/css/styles.css" />
+    <link rel="stylesheet" href="src/css/fonts.css" />
     <script src="src/js/main.js" defer></script>
     <link
       rel="shortcut icon"
@@ -12,37 +13,46 @@
       type="image/x-png"
     />
   </head>
-  <body class="h-screen flex flex-col justify-between bg-!050609 text-white">
-    <main>
-      <div class="p-3">
-        <div class="mt-2">
-          <h1 class="mb-3.5 text-center text-xl">Buscador de Waifus</h1>
-          <div class="w-full">
+  <body class="h-screen bg-!050609 text-white">
+    <main class="flex h-full flex-col justify-between gap-8">
+      <div class="mt-2 flex flex-col gap-4 p-4">
+        <div>
+          <h1 id="main-title" class="mb-3.5 text-center text-2xl">
+            Buscador de Waifus
+          </h1>
+          <div
+            class="w-full overflow-hidden rounded-md border-2 border-!FFC6AC"
+          >
             <img
-              src=""
+              src="./assets/images/pngegg.png"
               alt="Waifu"
               id="waifu-image"
-              class="border-!FDEFE7 h-full w-full border-2 object-cover"
+              class="relative -left-8 h-full w-full object-cover md:-left-12"
             />
           </div>
         </div>
-        <div class="my-3.5 border-1 border-!F855B1"></div>
+        <div class="rounded-md border-1 border-!F855B1"></div>
         <div>
           <form id="form" class="grid grid-cols-2 grid-rows-3 gap-3.5">
             <div class="col-start-1 row-span-2 row-start-1 flex flex-col gap-1">
-              <h2 class="text-center font-black text-xs">Tags</h2>
-              <ul id="tags" class="w-full h-full p-2 bg-!242424 text-xs rounded-md">
-                
-              </ul>
+              <h2 class="text-center text-xs font-black">Tags adicionadas</h2>
+              <ul
+                id="Tags__Container"
+                class="h-full w-full rounded-md bg-!242424 p-2 text-xs"
+              ></ul>
             </div>
-            <div class="col-start-2 row-start-1 flex flex-col items-center gap-1">
-              <label for="options" class="text-center font-black text-xs"
-                >Tags pre-criadas</label
+            <div
+              class="col-start-2 row-start-1 flex flex-col items-center gap-1"
+            >
+              <label for="options" class="text-center text-xs font-black"
+                >Tags disponíveis</label
               >
-              <select name="options" id="options" class="w-full grow p-2 rounded-md">
-                <option value="" disabled selected>
-                  Escolha uma opção
-                </option>
+              <select
+                name="options"
+                id="options"
+                class="w-full grow rounded-md p-2"
+              >
+                <option value="" disabled selected>Escolha uma opção</option>
                 <optgroup label="Tags">
                   <option value="maid">Maid</option>
                   <option value="marin-kitagawa">Marin Kitagawa</option>
@@ -55,19 +65,34 @@
                 </optgroup>
               </select>
             </div>
-            <div id="add-tag" class="col-start-2 row-start-2 w-full h-full flex    justify-center items-center bg-!F855B1 rounded-md text-center cursor-pointer">
-              Adicionar Tag
-            </div>
-            <div
-              class="col-span-2 col-start-1 row-start-3 w-3/4 mt-2 mx-auto flex items-center justify-center bg-!F855B1"
+            <button
+              type="button"
+              id="add-tag"
+              class="col-start-2 row-start-2 h-full w-full cursor-pointer rounded-md bg-!F855B1 p-4 text-center"
             >
-              <input type="submit" value="Buscar Waifu" id="search-waifu" class="p-4 w-full h-full rounded-md"></input>
+              Adicionar Tag
+            </button>
+            <div
+              class="col-span-2 col-start-1 row-start-3 mx-auto mt-2 flex w-3/4 items-center justify-center rounded-md bg-!F855B1"
+            >
+              <input
+                type="submit"
+                value="Buscar Waifu"
+                id="search-waifu"
+                class="h-full w-full p-4"
+              />
             </div>
           </form>
         </div>
       </div>
-      <div class="flex justify-center items-center">
-          <a href="#" download="waifu.png" id="download" class="p-4 w-full h-full bg-!F855B1 text-center">Download Imagem</a>
+      <div class="flex items-center justify-center">
+        <a
+          href="./assets/images/pngegg.png"
+          download="Waifu"
+          id="download"
+          class="h-full w-full bg-!F855B1 p-4 text-center"
+          >Download Waifu</a
+        >
       </div>
       <!-- <div class="modal" id="modal">
         <div class="modal-content">

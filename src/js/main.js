@@ -1,58 +1,92 @@
 const form = document.querySelector("#form");
 const addTags = document.querySelector("#add-tag");
 
-const tagsList = new Set(['waifu']);
+const tagsList = new Set(["waifu"]);
 
+const tagsElement = [];
 
 addTags.addEventListener("click", () => {
-  const options = document.querySelector("#options").value;
+  const addedTag = document.querySelector("#options").value;
 
-  const tags = document.querySelector("#tags");
-  const li = document.createElement("li");
+  addTagToList(addedTag);
+  addTagInDOM(addedTag);
+  addEventToRemoveTagsInDom(addedTag);
+  addEventToRemoveTagsFromTheList(addedTag);
+});
 
-  li.style = "display: inline-block; padding: .25rem .25rem; background-color: #F855B1; border-radius: .5rem; font-size: .5rem; font-weight: 700; color: #fff; margin: 0.5rem 0.25rem 0;";
-  
-  if (options === "") {
-    alert("Você deve preencher o campo de tags para adicionar uma nova tag.");
-  } else {
-    tagsList.add(options);
+function addTagToList(addedTag) {
+  if (addedTag === "") return;
 
-    for (const tag of tagsList) {
-      li.innerHTML = tag;
+  console.log(tagsList);
+  tagsList.add(addedTag);
+  console.log(tagsList);
+}
 
-      tags.appendChild(li);
+function addTagInDOM(addedTag) {
+  if (addedTag === "") return;
+  if (verifyIfTagExists(addedTag)) return;
+
+  const tagElement = document.createElement("li");
+  tagElement.style =
+    "display: inline-block; padding: .25rem .25rem; background-color: #F855B1; border-radius: .5rem; font-size: .5rem; font-weight: 700; color: #fff; margin: 0.5rem 0.25rem 0;";
+  tagElement.innerHTML = addedTag;
+
+  const containerTags = document.querySelector("#Tags__Container");
+  containerTags.appendChild(tagElement);
+
+  tagsElement.push(tagElement);
+}
+
+function verifyIfTagExists(addedTag) {
+  for (let i = 0; i < tagsElement.length; i++) {
+    if (tagsElement[i].innerHTML === addedTag) {
+      return true;
     }
+  }
+}
 
-    for(let i = 0; i < tags.children.length; i++) {
-      tags.children[i].addEventListener("click", () => {
-        tagsList.delete(tags.children[i].innerHTML);
-        tags.removeChild(tags.children[i]);
+function addEventToRemoveTagsFromTheList(addedTag) {
+  for (let i = 0; i < tagsElement.length; i++) {
+    if (tagsElement[i].innerHTML === addedTag) {
+      tagsElement[i].addEventListener("click", () => {
+        tagsList.delete(addedTag);
+        tagsElement.splice(tagsElement.indexOf(addedTag), 1);
       });
     }
   }
+}
 
-  console.log(tagsList);
-});
+function addEventToRemoveTagsInDom() {
+  for (let i = 0; i < tagsElement.length; i++) {
+    tagsElement[i].addEventListener("click", () => {
+      console.log(tagsElement[i]);
+      tagsElement[i].remove();
+
+      console.log(tagsElement);
+    });
+  }
+}
 
 form.addEventListener("submit", async (event) => {
   event.preventDefault();
-  
+
   changingTheButtonState();
 
   const paramsUrl = createRequest(Array.from(tagsList));
   const waifuImageURL = await getWaifu(paramsUrl);
 
-  if (verifyIfImageExists(waifuImageURL)) {
-    changingTheButtonState();
+  changingTheButtonState();
 
+  if (verifyIfImageExists(waifuImageURL)) {
+    removeStylesImage();
     addImageToDOM(waifuImageURL);
     addImageForDownload(waifuImageURL);
   }
 });
 
-function createRequest(tags) {
+function createRequest(included_tags) {
   const params = {
-    included_tags: tags,
+    included_tags: included_tags,
   };
 
   const queryParams = new URLSearchParams();
@@ -67,7 +101,7 @@ function createRequest(tags) {
     }
   }
 
-  console.log(queryParams.toString())
+  console.log(queryParams.toString());
 
   return queryParams.toString();
 }
@@ -77,17 +111,21 @@ async function getWaifu(paramsUrl) {
   const requestUrl = `${apiUrl}?${paramsUrl}`;
 
   try {
-    return await fetch(requestUrl).then((response) => response.json()).then((response) => response.images[0].url);
+    return await fetch(requestUrl)
+      .then((response) => response.json())
+      .then((response) => response.images[0].url);
   } catch (error) {
-    changingTheButtonState();
-
     console.error(`Ocorreu um erro: ${error}`);
+
+    return false;
   }
 }
 
 function verifyIfImageExists(waifuImageURL) {
-  if (waifuImageURL === undefined) {
-    alert("Não foi possível encontrar uma waifu com essas tags, tente novamente.");
+  if (waifuImageURL === undefined || waifuImageURL === false) {
+    alert(
+      "Ocorreu um erro ao buscar a waifu, tente novamente ou verifique sua conexão com a internet.",
+    );
 
     return false;
   }
@@ -95,27 +133,33 @@ function verifyIfImageExists(waifuImageURL) {
   return true;
 }
 
-function changingTheButtonState () {
+function changingTheButtonState() {
   const button = document.querySelector("#search-waifu");
-  
-  if (button.innerHTML === "Buscar Waifu") {
-    button.innerHTML = "Buscando Waifu...";
+
+  if (button.value === "Buscar Waifu") {
+    button.value = "Buscando Waifu...";
   } else {
-    button.innerHTML = "Buscar Waifu";
+    button.value = "Buscar Waifu";
   }
 }
 
-function addImageToDOM(waifuImageURL) { 
+function removeStylesImage() {
   const image = document.querySelector("#waifu-image");
 
-  loadingImageDom(image, waifuImageURL)
+  image.classList.remove("relative");
+}
+
+function addImageToDOM(waifuImageURL) {
+  const image = document.querySelector("#waifu-image");
+
+  loadingImageDom(image, waifuImageURL);
 
   setTimeout(() => {
     image.src = waifuImageURL;
-  }, 500);
+  }, 750);
 }
 
-function loadingImageDom (image, waifuImageURL) {
+function loadingImageDom(image, waifuImageURL) {
   if (image.src !== waifuImageURL) {
     image.src = "./assets/loading/loading.svg";
   }
@@ -124,8 +168,9 @@ function loadingImageDom (image, waifuImageURL) {
 async function addImageForDownload(waifuImageURL) {
   const downloadLink = document.querySelector("#download");
 
-  const imageBlob = await fetch(waifuImageURL).then((response) => response.blob());
+  const imageBlob = await fetch(waifuImageURL).then((response) =>
+    response.blob(),
+  );
 
   downloadLink.href = URL.createObjectURL(imageBlob);
 }
-
