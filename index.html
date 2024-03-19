@@ -26,14 +26,17 @@
             <img
               src="./assets/images/pngegg.png"
               alt="Waifu"
-              id="waifu-image"
+              id="waifuImage"
               class="relative -left-8 h-full w-full object-cover md:-left-12"
             />
           </div>
         </div>
         <div class="rounded-md border-1 border-!F855B1"></div>
         <div>
-          <form id="form" class="grid grid-cols-2 grid-rows-3 gap-3.5">
+          <form
+            id="waifuSearchSettings"
+            class="grid grid-cols-2 grid-rows-3 gap-3.5"
+          >
             <div class="col-start-1 row-span-2 row-start-1 flex flex-col gap-1">
               <h2 class="text-center text-xs font-black">Tags adicionadas</h2>
               <ul
@@ -44,12 +47,14 @@
             <div
               class="col-start-2 row-start-1 flex flex-col items-center gap-1"
             >
-              <label for="options" class="text-center text-xs font-black"
+              <label
+                for="availableLabels"
+                class="text-center text-xs font-black"
                 >Tags disponíveis</label
               >
               <select
-                name="options"
-                id="options"
+                name="availableLabels"
+                id="availableLabels"
                 class="w-full grow rounded-md p-2"
               >
                 <option value="" disabled selected>Escolha uma opção</option>
@@ -67,7 +72,7 @@
             </div>
             <button
               type="button"
-              id="add-tag"
+              id="addTag"
               class="col-start-2 row-start-2 h-full w-full cursor-pointer rounded-md bg-!F855B1 p-4 text-center"
             >
               Adicionar Tag
@@ -78,7 +83,7 @@
               <input
                 type="submit"
                 value="Buscar Waifu"
-                id="search-waifu"
+                id="searchWaifu"
                 class="h-full w-full p-4"
               />
             </div>
@@ -89,7 +94,7 @@
         <a
           href="./assets/images/pngegg.png"
           download="Waifu"
-          id="download"
+          id="downloadTheWaifu"
           class="h-full w-full bg-!F855B1 p-4 text-center"
           >Download Waifu</a
         >

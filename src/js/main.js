@@ -1,30 +1,27 @@
-const form = document.querySelector("#form");
-const addTags = document.querySelector("#add-tag");
+"use strict";
+
+const waifuSearchSettings = document.querySelector("#waifuSearchSettings");
+const addTag = document.querySelector("#addTag");
 
 const tagsList = new Set(["waifu"]);
 
-const tagsElement = [];
-
-addTags.addEventListener("click", () => {
-  const addedTag = document.querySelector("#options").value;
+addTag.addEventListener("click", () => {
+  const addedTag = document.querySelector("#availableLabels").value;
 
   addTagToList(addedTag);
   addTagInDOM(addedTag);
-  addEventToRemoveTagsInDom(addedTag);
-  addEventToRemoveTagsFromTheList(addedTag);
+  addEventToRemove();
 });
 
 function addTagToList(addedTag) {
   if (addedTag === "") return;
 
-  console.log(tagsList);
   tagsList.add(addedTag);
-  console.log(tagsList);
 }
 
 function addTagInDOM(addedTag) {
   if (addedTag === "") return;
-  if (verifyIfTagExists(addedTag)) return;
+  if (verifyIfTagExists()) return;
 
   const tagElement = document.createElement("li");
   tagElement.style =
@@ -33,41 +30,34 @@ function addTagInDOM(addedTag) {
 
   const containerTags = document.querySelector("#Tags__Container");
   containerTags.appendChild(tagElement);
-
-  tagsElement.push(tagElement);
 }
 
-function verifyIfTagExists(addedTag) {
+function verifyIfTagExists() {
+  const tagsElement = document.querySelectorAll("#Tags__Container li");
+
   for (let i = 0; i < tagsElement.length; i++) {
-    if (tagsElement[i].innerHTML === addedTag) {
+    if (
+      tagsElement[i].innerHTML ===
+      document.querySelector("#availableLabels").value
+    )
       return true;
-    }
   }
+
+  return false;
 }
 
-function addEventToRemoveTagsFromTheList(addedTag) {
-  for (let i = 0; i < tagsElement.length; i++) {
-    if (tagsElement[i].innerHTML === addedTag) {
-      tagsElement[i].addEventListener("click", () => {
-        tagsList.delete(addedTag);
-        tagsElement.splice(tagsElement.indexOf(addedTag), 1);
-      });
-    }
-  }
-}
+function addEventToRemove() {
+  const tagsElement = document.querySelectorAll("#Tags__Container li");
 
-function addEventToRemoveTagsInDom() {
-  for (let i = 0; i < tagsElement.length; i++) {
-    tagsElement[i].addEventListener("click", () => {
-      console.log(tagsElement[i]);
-      tagsElement[i].remove();
-
-      console.log(tagsElement);
+  tagsElement.forEach((tag) => {
+    tag.addEventListener("click", () => {
+      tagsList.delete(tag.innerHTML);
+      tag.remove();
     });
-  }
+  });
 }
 
-form.addEventListener("submit", async (event) => {
+waifuSearchSettings.addEventListener("submit", async (event) => {
   event.preventDefault();
 
   changingTheButtonState();
@@ -79,6 +69,7 @@ form.addEventListener("submit", async (event) => {
 
   if (verifyIfImageExists(waifuImageURL)) {
     removeStylesImage();
+
     addImageToDOM(waifuImageURL);
     addImageForDownload(waifuImageURL);
   }
@@ -101,8 +92,6 @@ function createRequest(included_tags) {
     }
   }
 
-  console.log(queryParams.toString());
-
   return queryParams.toString();
 }
 
@@ -124,7 +113,7 @@ async function getWaifu(paramsUrl) {
 function verifyIfImageExists(waifuImageURL) {
   if (waifuImageURL === undefined || waifuImageURL === false) {
     alert(
-      "Ocorreu um erro ao buscar a waifu, tente novamente ou verifique sua conexão com a internet.",
+      "Não foi possível encontrar uma waifu com as tags selecionadas. Tente novamente! Lembre-se de está conectado a internet.",
     );
 
     return false;
@@ -134,7 +123,7 @@ function verifyIfImageExists(waifuImageURL) {
 }
 
 function changingTheButtonState() {
-  const button = document.querySelector("#search-waifu");
+  const button = document.querySelector("#searchWaifu");
 
   if (button.value === "Buscar Waifu") {
     button.value = "Buscando Waifu...";
@@ -144,13 +133,13 @@ function changingTheButtonState() {
 }
 
 function removeStylesImage() {
-  const image = document.querySelector("#waifu-image");
+  const image = document.querySelector("#waifuImage");
 
   image.classList.remove("relative");
 }
 
 function addImageToDOM(waifuImageURL) {
-  const image = document.querySelector("#waifu-image");
+  const image = document.querySelector("#waifuImage");
 
   loadingImageDom(image, waifuImageURL);
 
@@ -166,7 +155,7 @@ function loadingImageDom(image, waifuImageURL) {
 }
 
 async function addImageForDownload(waifuImageURL) {
-  const downloadLink = document.querySelector("#download");
+  const downloadLink = document.querySelector("#downloadTheWaifu");
 
   const imageBlob = await fetch(waifuImageURL).then((response) =>
     response.blob(),
