@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .Tag__Item {
+    @apply mx-1 my-2 inline-block rounded-lg bg-!F855B1 p-1 text-3xs font-bold text-white;
+  }
+}

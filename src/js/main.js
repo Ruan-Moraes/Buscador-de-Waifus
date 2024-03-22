@@ -24,8 +24,7 @@ function addTagInDOM(addedTag) {
   if (verifyIfTagExists()) return;
 
   const tagElement = document.createElement("li");
-  tagElement.style =
-    "display: inline-block; padding: .25rem .25rem; background-color: #F855B1; border-radius: .5rem; font-size: .5rem; font-weight: 700; color: #fff; margin: 0.5rem 0.25rem 0;";
+  tagElement.classList.add("Tag__Item");
   tagElement.innerHTML = addedTag;
 
   const containerTags = document.querySelector("#Tags__Container");
@@ -141,17 +140,30 @@ function removeStylesImage() {
 function addImageToDOM(waifuImageURL) {
   const image = document.querySelector("#waifuImage");
 
-  loadingImageDom(image, waifuImageURL);
+  PlaceLoadingSVG(image, waifuImageURL);
 
   setTimeout(() => {
     image.src = waifuImageURL;
-  }, 750);
+  }, 250);
 }
 
-function loadingImageDom(image, waifuImageURL) {
+function PlaceLoadingSVG(image, waifuImageURL) {
   if (image.src !== waifuImageURL) {
     image.src = "./assets/loading/loading.svg";
   }
+
+  setTimeout(() => {
+    const ImageURL = image.src;
+    const pathToLoadingSVG = "/assets/loading/loading.svg";
+
+    if (ImageURL.endsWith(pathToLoadingSVG)) {
+      notifyImageUpload();
+    }
+  }, 6000);
+}
+
+function notifyImageUpload() {
+  alert("A imagem está sendo carregada, aguarde um momento.");
 }
 
 async function addImageForDownload(waifuImageURL) {
