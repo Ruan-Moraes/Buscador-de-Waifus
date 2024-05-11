@@ -148,6 +148,9 @@ function addImageToDOM(waifuImageURL) {
 }
 
 function PlaceLoadingSVG(image, waifuImageURL) {
+  console.log(image)
+  console.log(waifuImageURL)
+
   if (image.src !== waifuImageURL) {
     image.src = "./assets/loading/loading.svg";
   }
@@ -156,10 +159,15 @@ function PlaceLoadingSVG(image, waifuImageURL) {
     const ImageURL = image.src;
     const pathToLoadingSVG = "/assets/loading/loading.svg";
 
+    console.log(ImageURL);
+    console.log(pathToLoadingSVG);
+    console.log(ImageURL.endsWith(pathToLoadingSVG));
+
     if (ImageURL.endsWith(pathToLoadingSVG)) {
+      console.log("A imagem está sendo carregada, aguarde um momento.3");
       notifyImageUpload();
     }
-  }, 6000);
+  }, 3000);
 }
 
 function notifyImageUpload() {

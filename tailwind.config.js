@@ -4,6 +4,9 @@ module.exports = {
   purge: ["./*.html", "./src/**/*.js"],
   theme: {
     extend: {
+      maxHeight: {
+        "75/100": "75vh",
+      },
       fontSize: {
         "3xs": "0.5rem",
       },
