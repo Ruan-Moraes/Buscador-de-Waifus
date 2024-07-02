@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-br">
   <head>
     <meta charset="UTF-8" />
@@ -12,111 +12,84 @@
       href="assets/favicon/favicon.png"
       type="image/x-png"
     />
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+      * {
+        font-family: 'Nunito', sans-serif;
+      }
+    </style>
   </head>
-  <body class="min-h-screen bg-!050609 text-white">
-    <main class="flex h-full flex-col justify-between gap-8 lg:justify-center">
-      <div class="mt-2 flex flex-col gap-4 p-4 lg:flex-row">
-        <div class="lg:w-2/4">
-          <h1 class="title mb-3.5 text-center text-2xl">Buscador de Waifus</h1>
-          <div
-            class="max-h-75/100 w-full overflow-hidden rounded-md border-2 border-!FFC6AC"
-          >
-            <img
-              src="assets/images/pngegg.png"
-              alt="Waifu"
-              id="waifuImage"
-              class="h-full w-full object-cover"
-            />
+  <body
+    class="flex flex-col justify-between min-h-screen gap-8 tracking-wide text-white bg-primary"
+  >
+    <main class="px-2 pt-4">
+      <div class="rounded-md bg-secondary">
+        <div>
+          <div class="p-2 border-b-2 border-b-primary">
+            <h1 class="text-lg font-bold text-center">Buscador de Waifus</h1>
+          </div>
+          <div>
+            <img src="assets/images/pngegg.png" alt="Waifu" id="waifuImage" />
           </div>
         </div>
-        <div class="rounded-md border-1 border-!F855B1 lg:hidden"></div>
-        <div class="flex flex-col lg:w-2/4">
-          <h1 class="title mb-3.5 hidden text-center text-2xl lg:block">
-            Configurações de Busca
-          </h1>
-          <form
-            id="waifuSearchSettings"
-            class="grid h-full grid-cols-2 grid-rows-3 gap-3.5 rounded-md lg:flex lg:flex-col lg:border-2 lg:border-!FFC6AC lg:p-4"
-          >
-            <div class="col-start-1 row-span-2 row-start-1 flex flex-col gap-1">
-              <h2 class="text-center text-xs font-black lg:text-sm">
-                TAGs adicionadas
-              </h2>
-              <ul
-                id="Tags__Container"
-                class="h-full w-full rounded-md bg-!242424 p-2 text-xs lg:h-auto lg:w-auto lg:p-6"
-              ></ul>
-            </div>
-            <div class="rounded-md border-1 border-!F855B1"></div>
-            <div
-              class="col-start-2 row-start-1 flex flex-col items-center gap-1"
-            >
-              <label
-                for="availableLabels"
-                class="text-center text-xs font-black lg:text-sm"
-                >TAGs disponíveis</label
+        <div class="flex flex-col gap-2 p-2 border-t-2 border-t-primary">
+          <div>
+            <h1 class="font-bold text-center">Configurações de Busca</h1>
+          </div>
+          <div class="flex gap-2">
+            <div class="w-2/4 border-2 rounded-md border-primary">
+              <div
+                class="p-1 border-b-2 rounded-t-md border-b-primary bg-tertiary"
               >
-              <select
-                name="availableLabels"
-                id="availableLabels"
-                class="w-full grow rounded-md p-2 lg:p-4"
-              >
-                <option value="" disabled selected>Escolha uma opção</option>
-                <optgroup label="Tags">
-                  <option value="maid">Maid</option>
-                  <option value="marin-kitagawa">Marin Kitagawa</option>
-                  <option value="mori-calliope">Mori Calliope</option>
-                  <option value="raiden-shogun">Raiden Shogun</option>
-                  <option value="oppai">Oppai</option>
-                  <option value="selfies">Selfies</option>
-                  <option value="uniform">Uniform</option>
-                  <option value="kamisato-ayaka">Kamisato Ayaka</option>
-                </optgroup>
-              </select>
+                <h2 class="text-sm font-bold text-center text-primary">
+                  TAGs adicionadas
+                </h2>
+              </div>
+              <div class="p-1">
+                <ul id="tagsContainer" class="flex flex-wrap gap-1"></ul>
+              </div>
             </div>
-            <button
-              type="button"
-              id="addTag"
-              class="col-start-2 row-start-2 h-full w-full cursor-pointer rounded-md bg-!F855B1 p-4 text-center lg:h-auto"
-            >
-              Adicionar TAG
-            </button>
-            <div
-              class="col-span-2 col-start-1 row-start-3 mx-auto mt-2 flex w-3/4 items-center justify-center rounded-md bg-!F855B1"
-            >
-              <input
-                type="submit"
-                value="Buscar Waifu"
-                id="searchWaifu"
-                class="h-full w-full cursor-pointer p-4"
-              />
+            <div class="w-2/4">
+              <form id="waifuSearchSettings">
+                <div>
+                  <label for="availableLabels">TAGs disponíveis</label>
+                  <select name="availableLabels" id="availableLabels">
+                    <option value="" disabled selected>
+                      Escolha uma opção
+                    </option>
+                    <optgroup label="Tags">
+                      <option value="maid">Maid</option>
+                      <option value="marin-kitagawa">Marin Kitagawa</option>
+                      <option value="mori-calliope">Mori Calliope</option>
+                      <option value="raiden-shogun">Raiden Shogun</option>
+                      <option value="oppai">Oppai</option>
+                      <option value="selfies">Selfies</option>
+                      <option value="uniform">Uniform</option>
+                      <option value="kamisato-ayaka">Kamisato Ayaka</option>
+                    </optgroup>
+                  </select>
+                </div>
+                <button type="button" id="addTag">Adicionar TAG</button>
+              </form>
             </div>
-          </form>
+          </div>
+        </div>
+        <div>
+          <div>
+            <input type="submit" value="Buscar Waifu" id="searchWaifu" />
+          </div>
         </div>
       </div>
-      <div class="flex items-center justify-center">
-        <a
-          href="./assets/images/pngegg.png"
-          download="Waifu"
-          id="downloadTheWaifu"
-          class="h-full w-full rounded-md bg-!F855B1 p-4 text-center lg:w-2/4"
-          >Download Waifu</a
-        >
-      </div>
-      <!-- <div
-        id="modal"
-        class="absolute left-2/4 top-2/4 flex -translate-x-2/4 -translate-y-2/4 overflow-hidden rounded-l-lg bg-!242424"
-      >
-        <div class="w-4 bg-!FFC6AC">&nbsp;</div>
-        <div class="p-4">
-          <div class="">
-            <h2 id="modalTitle" class="font-bold uppercase">Ocorreu um erro</h2>
-          </div>
-          <div class="">
-            <p id="modalMessage"></p>
-          </div>
-        </div>
-      </div> -->
     </main>
+    <footer>
+      <a
+        href="./assets/images/pngegg.png"
+        download="Waifu"
+        id="downloadTheWaifu"
+        class="button"
+        >Download Waifu</a
+      >
+    </footer>
   </body>
 </html>

@@ -3,7 +3,11 @@
 @tailwind utilities;
 
 @layer components {
-  .Tag__Item {
-    @apply mx-1 my-2 inline-block rounded-lg bg-!F855B1 p-1 text-3xs font-bold text-white;
+  .button {
+    @apply block p-3 font-bold text-center uppercase bg-tertiary text-primary;
+  }
+
+  .tagItem {
+    @apply inline-block p-1.5 text-xs text-white rounded-md bg-primary cursor-pointer;
   }
 }
