@@ -1,10 +1,7 @@
 'use strict';
 
-const waifuSearchSettings = document.querySelector('#waifuSearchSettings');
-const addTag = document.querySelector('#addTag');
-
 const tagsList = new Set(['waifu']);
-
+const addTag = document.querySelector('#addTag');
 addTag.addEventListener('click', () => {
   const addedTag = document.querySelector('#availableLabels').value;
 
@@ -57,9 +54,9 @@ function addEventToRemove() {
   });
 }
 
-waifuSearchSettings.addEventListener('submit', async (event) => {
-  event.preventDefault();
+// Main function
 
+document.querySelector('#searchWaifu').addEventListener('click', async () => {
   changingTheButtonState();
 
   const paramsUrl = createRequest(Array.from(tagsList));
@@ -76,10 +73,10 @@ waifuSearchSettings.addEventListener('submit', async (event) => {
 function changingTheButtonState() {
   const button = document.querySelector('#searchWaifu');
 
-  if (button.value === 'Buscar Waifu') {
-    button.value = 'Buscando Waifu...';
+  if (button.innerText === 'Buscar Waifu') {
+    button.innerText = 'Buscando Waifu...';
   } else {
-    button.value = 'Buscar Waifu';
+    button.innerText = 'Buscar Waifu';
   }
 }
 

@@ -24,7 +24,7 @@
     class="flex flex-col justify-between min-h-screen gap-8 tracking-wide text-white bg-primary"
   >
     <main class="px-2 pt-4">
-      <div class="rounded-md bg-secondary">
+      <div class="overflow-auto rounded-md bg-secondary">
         <div>
           <div class="p-2 border-b-2 border-b-primary">
             <h1 class="text-lg font-bold text-center">Buscador de Waifus</h1>
@@ -43,21 +43,27 @@
                 class="p-1 border-b-2 rounded-t-md border-b-primary bg-tertiary"
               >
                 <h2 class="text-sm font-bold text-center text-primary">
-                  TAGs adicionadas
+                  Tags adicionadas
                 </h2>
               </div>
               <div class="p-1">
                 <ul id="tagsContainer" class="flex flex-wrap gap-1"></ul>
               </div>
             </div>
-            <div class="w-2/4">
+            <div class="w-2/4 border-2 rounded-md border-primary">
               <form id="waifuSearchSettings">
-                <div>
-                  <label for="availableLabels">TAGs disponíveis</label>
-                  <select name="availableLabels" id="availableLabels">
-                    <option value="" disabled selected>
-                      Escolha uma opção
-                    </option>
+                <div class="p-1 rounded-t-md bg-tertiary">
+                  <label
+                    class="block w-full pb-1 text-sm font-bold text-center text-primary"
+                    for="availableLabels"
+                    >Tags disponíveis</label
+                  >
+                  <select
+                    name="availableLabels"
+                    id="availableLabels"
+                    class="w-full p-1 mb-1 text-sm border-2 rounded-md bg-secondary border-primary"
+                  >
+                    <option value="" disabled selected>Escolha uma Tag</option>
                     <optgroup label="Tags">
                       <option value="maid">Maid</option>
                       <option value="marin-kitagawa">Marin Kitagawa</option>
@@ -70,14 +76,22 @@
                     </optgroup>
                   </select>
                 </div>
-                <button type="button" id="addTag">Adicionar TAG</button>
+                <button type="button" id="addTag" class="w-full p-1 bg-primary">
+                  Adicionar Tag
+                </button>
               </form>
             </div>
           </div>
         </div>
         <div>
           <div>
-            <input type="submit" value="Buscar Waifu" id="searchWaifu" />
+            <button
+              type="button"
+              id="searchWaifu"
+              class="w-full p-2 mt-4 font-bold text-black bg-tertiary"
+            >
+              Buscar Waifu
+            </button>
           </div>
         </div>
       </div>
