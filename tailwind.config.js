@@ -4,6 +4,9 @@ module.exports = {
   purge: ['./*.html', './src/**/*.js'],
   theme: {
     extend: {
+      maxWidth: {
+        '768px': '80rem',
+      },
       colors: {
         primary: '#080808',
         secondary: '#222222',

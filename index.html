@@ -23,25 +23,32 @@
   <body
     class="flex flex-col justify-between min-h-screen gap-8 tracking-wide text-white bg-primary"
   >
-    <main class="px-2 pt-4">
-      <div class="overflow-auto rounded-md bg-secondary">
-        <div>
+    <main class="w-full px-2 pt-2 sm:px-8 sm:pt-8 lg:max-w-768px lg:mx-auto">
+      <div class="overflow-auto lg:grid-cols-2 lg:grid bg-secondary">
+        <div class="lg:col-span-1 lg:border-r-2 lg:border-r-primary">
           <div class="p-2 border-b-2 border-b-primary">
             <h1 class="text-lg font-bold text-center">Buscador de Waifus</h1>
           </div>
-          <div>
-            <img src="assets/images/pngegg.png" alt="Waifu" id="waifuImage" />
+          <div class="flex items-center justify-center">
+            <img
+              src="assets/images/Shoulder-Shrug-Emoji-9.svg"
+              alt="Waifu"
+              id="waifuImage"
+              class="h-80"
+            />
           </div>
         </div>
-        <div class="flex flex-col gap-2 p-2 border-t-2 border-t-primary">
-          <div>
-            <h1 class="font-bold text-center">Configurações de Busca</h1>
+        <div
+          class="flex flex-col gap-2 p-2 border-t-2 lg:gap-0 lg:p-0 border-l-primary lg:border-l-2 lg:col-span-1 border-t-primary lg:border-t-0"
+        >
+          <div class="lg:border-b-2 lg:p-2 lg:border-b-primary">
+            <h1 class="font-bold text-center lg:text-lg">
+              Configurações de Busca
+            </h1>
           </div>
-          <div class="flex gap-2">
-            <div class="w-2/4 border-2 rounded-md border-primary">
-              <div
-                class="p-1 border-b-2 rounded-t-md border-b-primary bg-tertiary"
-              >
+          <div class="flex gap-2 lg:m-2">
+            <div class="w-2/4 border-2 border-primary">
+              <div class="p-1 border-b-2 border-b-primary bg-tertiary">
                 <h2 class="text-sm font-bold text-center text-primary">
                   Tags adicionadas
                 </h2>
@@ -50,9 +57,9 @@
                 <ul id="tagsContainer" class="flex flex-wrap gap-1"></ul>
               </div>
             </div>
-            <div class="w-2/4 border-2 rounded-md border-primary">
+            <div class="w-2/4 border-2 border-primary">
               <form id="waifuSearchSettings">
-                <div class="p-1 rounded-t-md bg-tertiary">
+                <div class="p-1 bg-tertiary">
                   <label
                     class="block w-full pb-1 text-sm font-bold text-center text-primary"
                     for="availableLabels"
@@ -61,7 +68,7 @@
                   <select
                     name="availableLabels"
                     id="availableLabels"
-                    class="w-full p-1 mb-1 text-sm border-2 rounded-md bg-secondary border-primary"
+                    class="w-full p-1 mb-1 text-sm border-2 bg-secondary border-primary"
                   >
                     <option value="" disabled selected>Escolha uma Tag</option>
                     <optgroup label="Tags">
@@ -83,12 +90,12 @@
             </div>
           </div>
         </div>
-        <div>
+        <div class="lg:border-y-2 lg:border-y-primary lg:col-span-2">
           <div>
             <button
               type="button"
               id="searchWaifu"
-              class="w-full p-2 mt-4 font-bold text-black bg-tertiary"
+              class="w-full p-2 mt-4 font-bold text-black lg:mt-0 bg-tertiary"
             >
               Buscar Waifu
             </button>

@@ -124,6 +124,7 @@ function addImageToDOM(waifuImageURL) {
 
   if (placeLoadingSVG(image, waifuImageURL)) {
     setTimeout(() => {
+      image.removeAttribute('class');
       image.src = waifuImageURL;
     }, 50);
   }
@@ -135,6 +136,8 @@ function placeLoadingSVG(image, waifuImageURL) {
 
     return true;
   }
+
+  alert('Imagem já carregada!');
 
   return false;
 }
