@@ -82,7 +82,7 @@ function changingTheButtonState() {
 
 function createRequest(included_tags) {
   const params = {
-    included_tags: included_tags,
+    IncludedTags: included_tags,
   };
 
   const queryParams = new URLSearchParams();
@@ -101,13 +101,13 @@ function createRequest(included_tags) {
 }
 
 async function getWaifu(paramsUrl) {
-  const apiUrl = 'https://api.waifu.im/search';
+  const apiUrl = 'https://api.waifu.im/images';
   const requestUrl = `${apiUrl}?${paramsUrl}`;
 
   try {
     return await fetch(requestUrl)
       .then((response) => response.json())
-      .then((response) => response.images[0].url);
+      .then((response) => response.items[0].url);
   } catch (error) {
     console.error(error);
 
