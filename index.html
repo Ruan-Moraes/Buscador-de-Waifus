@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Buscador de Waifus</title>
+    <title>WaifuDB - Searcher</title>
     <link rel="stylesheet" href="src/css/styles.css" />
     <link rel="stylesheet" href="src/css/fonts.css" />
     <script src="src/js/main.js" defer></script>
@@ -14,103 +14,121 @@
     />
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
-
-      * {
-        font-family: 'Nunito', sans-serif;
-      }
     </style>
   </head>
-  <body
-    class="flex flex-col justify-between min-h-screen gap-8 tracking-wide text-white bg-primary"
-  >
-    <main class="w-full px-2 pt-2 sm:px-8 sm:pt-8 lg:max-w-768px lg:mx-auto">
-      <div class="overflow-auto lg:grid-cols-2 lg:grid bg-secondary">
-        <div class="lg:col-span-1 lg:border-r-2 lg:border-r-primary">
-          <div class="p-2 border-b-2 border-b-primary">
-            <h1 class="text-lg font-bold text-center">Buscador de Waifus</h1>
+  <body class="min-h-screen flex flex-col text-gray-100 bg-gradient-to-br from-zinc-950 via-waifupurple-950 to-zinc-900 font-sans selection:bg-waifupink-500 selection:text-white">
+    <!-- Glow Effect Background -->
+    <div class="fixed top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
+      <div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-waifupink-600/20 blur-[120px]"></div>
+      <div class="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-indigo-600/20 blur-[120px]"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="w-full p-6 flex justify-between items-center max-w-7xl mx-auto">
+      <div class="flex items-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-waifupink-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+        <h1 class="text-2xl font-black tracking-widest uppercase text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400">Waifu<span class="text-waifupink-500">DB</span></h1>
+      </div>
+    </header>
+
+    <main class="w-full px-4 pb-12 max-w-7xl mx-auto flex-1 flex flex-col justify-center">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+        
+        <!-- Left Column: Controls -->
+        <div class="lg:col-span-5 flex flex-col gap-6 bg-glass backdrop-blur-xl border border-glassborder rounded-3xl p-8 shadow-2xl justify-between">
+          <div>
+            <div>
+              <h2 class="text-2xl font-bold mb-2 text-white">Configure Search</h2>
+              <p class="text-sm text-gray-300">Select the tags you want to include to find the perfect waifu.</p>
+            </div>
+
+            <form id="waifuSearchSettings" class="flex flex-col gap-5 mt-6">
+              <div class="flex flex-col gap-2">
+                <label class="text-sm font-semibold text-waifupink-300 uppercase tracking-wider" for="tagInput">Search or Select Tag</label>
+                <div class="flex gap-2">
+                  <div class="relative flex-1" id="customSelectContainer">
+                    <input
+                      type="text"
+                      id="tagInput"
+                      autocomplete="off"
+                      placeholder="Type to search tags..."
+                      class="w-full bg-black/50 border border-white/10 rounded-xl p-4 text-sm focus:outline-none focus:ring-2 focus:ring-waifupink-500 focus:border-transparent transition-all placeholder-gray-500 text-white"
+                    />
+                    <!-- Custom Dropdown Menu -->
+                    <div id="dropdownMenu" class="absolute z-50 w-full mt-2 bg-zinc-900 border border-white/10 rounded-xl shadow-2xl max-h-60 overflow-y-auto hidden flex-col custom-scrollbar">
+                    </div>
+                  </div>
+                  <button type="button" id="addTag" class="px-5 py-4 bg-waifupink-600/20 hover:bg-waifupink-600/40 border border-waifupink-500/30 rounded-xl transition-all font-bold text-waifupink-300 hover:text-white shadow-[0_0_15px_rgba(236,72,153,0.15)] flex items-center justify-center">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                  </button>
+                </div>
+              </div>
+
+              <!-- +18 (NSFW) Toggle -->
+              <div class="flex items-center justify-between bg-black/30 p-4 rounded-xl border border-white/5 shadow-inner">
+                <span class="text-sm font-bold text-waifupink-200">Permitir conteúdo +18 (NSFW)</span>
+                <label class="relative inline-flex items-center cursor-pointer">
+                  <input type="checkbox" id="nsfwToggle" class="sr-only peer">
+                  <div class="w-11 h-6 bg-gray-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-waifupink-500 shadow-[0_0_10px_rgba(236,72,153,0.3)]"></div>
+                </label>
+              </div>
+
+              <!-- Tags Display -->
+              <div class="flex flex-col gap-2 min-h-[140px] bg-black/30 rounded-xl p-5 border border-white/5 shadow-inner">
+                <h3 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">Active Tags</h3>
+                <ul id="tagsContainer" class="flex flex-wrap gap-2"></ul>
+              </div>
+            </form>
           </div>
-          <div class="flex items-center justify-center">
+
+          <!-- Search Button -->
+          <div class="pt-6 mt-4 border-t border-white/10">
+            <button
+              type="button"
+              id="searchWaifu"
+              class="w-full py-4 rounded-xl font-bold tracking-widest uppercase transition-all duration-300 bg-gradient-to-r from-waifupink-600 to-purple-600 hover:from-waifupink-500 hover:to-purple-500 shadow-[0_0_20px_rgba(236,72,153,0.3)] hover:shadow-[0_0_30px_rgba(236,72,153,0.5)] transform hover:-translate-y-1 active:translate-y-0 text-white"
+            >
+              <span id="searchWaifuText">Search Waifu</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Right Column: Image Display -->
+        <div class="lg:col-span-7 flex flex-col bg-glass backdrop-blur-xl border border-glassborder rounded-3xl p-8 shadow-2xl relative overflow-hidden group">
+          <!-- Ambient light behind image -->
+          <div class="absolute inset-0 bg-gradient-to-t from-waifupink-900/10 to-transparent pointer-events-none rounded-3xl"></div>
+          
+          <div class="flex-1 flex items-center justify-center min-h-[500px] lg:min-h-[600px] relative rounded-2xl overflow-hidden bg-black/50 border border-white/5 shadow-inner">
+            <!-- Loading Indicator (hidden by default) -->
+            <div id="loadingIndicator" class="absolute inset-0 flex items-center justify-center bg-black/70 backdrop-blur-sm z-10 opacity-0 pointer-events-none transition-opacity duration-300">
+              <svg class="animate-spin h-12 w-12 text-waifupink-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+            </div>
+            
             <img
               src="assets/images/Shoulder-Shrug-Emoji-9.svg"
               alt="Waifu"
               id="waifuImage"
-              class="h-80"
+              class="max-w-full max-h-[700px] object-contain transition-opacity duration-500 ease-in-out drop-shadow-2xl"
             />
           </div>
-        </div>
-        <div
-          class="flex flex-col gap-2 p-2 border-t-2 lg:gap-0 lg:p-0 border-l-primary lg:border-l-2 lg:col-span-1 border-t-primary lg:border-t-0"
-        >
-          <div class="lg:border-b-2 lg:p-2 lg:border-b-primary">
-            <h1 class="font-bold text-center lg:text-lg">
-              Configurações de Busca
-            </h1>
-          </div>
-          <div class="flex gap-2 lg:m-2">
-            <div class="w-2/4 border-2 border-primary">
-              <div class="p-1 border-b-2 border-b-primary bg-tertiary">
-                <h2 class="text-sm font-bold text-center text-primary">
-                  Tags adicionadas
-                </h2>
-              </div>
-              <div class="p-1">
-                <ul id="tagsContainer" class="flex flex-wrap gap-1"></ul>
-              </div>
-            </div>
-            <div class="w-2/4 border-2 border-primary">
-              <form id="waifuSearchSettings">
-                <div class="p-1 bg-tertiary">
-                  <label
-                    class="block w-full pb-1 text-sm font-bold text-center text-primary"
-                    for="availableLabels"
-                    >Tags disponíveis</label
-                  >
-                  <select
-                    name="availableLabels"
-                    id="availableLabels"
-                    class="w-full p-1 mb-1 text-sm border-2 bg-secondary border-primary"
-                  >
-                    <option value="" disabled selected>Escolha uma Tag</option>
-                    <optgroup label="Tags">
-                      <option value="maid">Maid</option>
-                      <option value="marin-kitagawa">Marin Kitagawa</option>
-                      <option value="mori-calliope">Mori Calliope</option>
-                      <option value="raiden-shogun">Raiden Shogun</option>
-                      <option value="oppai">Oppai</option>
-                      <option value="selfies">Selfies</option>
-                      <option value="uniform">Uniform</option>
-                      <option value="kamisato-ayaka">Kamisato Ayaka</option>
-                    </optgroup>
-                  </select>
-                </div>
-                <button type="button" id="addTag" class="w-full p-1 bg-primary">
-                  Adicionar Tag
-                </button>
-              </form>
-            </div>
-          </div>
-        </div>
-        <div class="lg:border-y-2 lg:border-y-primary lg:col-span-2">
-          <div>
-            <button
-              type="button"
-              id="searchWaifu"
-              class="w-full p-2 mt-4 font-bold text-black lg:mt-0 bg-tertiary"
+
+          <div class="mt-6 flex justify-between items-center w-full">
+            <span class="text-xs text-gray-500 italic" id="imageStatus">Ready for download</span>
+            <a
+              href="#"
+              id="downloadTheWaifu"
+              class="px-8 py-4 rounded-xl bg-gradient-to-r from-waifupink-600 to-purple-600 hover:from-waifupink-500 hover:to-purple-500 shadow-[0_0_20px_rgba(236,72,153,0.3)] hover:shadow-[0_0_30px_rgba(236,72,153,0.5)] transform hover:-translate-y-1 transition-all font-bold tracking-widest text-sm flex items-center gap-3 opacity-50 pointer-events-none text-white"
             >
-              Buscar Waifu
-            </button>
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+              DOWNLOAD
+            </a>
           </div>
         </div>
+        
       </div>
     </main>
-    <footer>
-      <a
-        href="./assets/images/pngegg.png"
-        download="Waifu"
-        id="downloadTheWaifu"
-        class="button"
-        >Download Waifu</a
-      >
-    </footer>
   </body>
 </html>

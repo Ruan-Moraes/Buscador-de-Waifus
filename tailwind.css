@@ -2,12 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer components {
-  .button {
-    @apply block p-3 font-bold text-center uppercase bg-tertiary text-primary;
+@layer utilities {
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
   }
-
-  .tagItem {
-    @apply inline-block p-1.5 text-xs text-white bg-primary cursor-pointer;
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(236, 72, 153, 0.4);
+    border-radius: 10px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: rgba(236, 72, 153, 0.8);
   }
 }
